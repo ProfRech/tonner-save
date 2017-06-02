@@ -1,0 +1,32 @@
+﻿  dllmain.cpp
+  MappedFile.cpp
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\mappedfile.cpp(177): warning C4996: '_open': This function or variable may be unsafe. Consider using _sopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_io.h(388): note: see declaration of '_open'
+  FontsManager.cpp
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\fontsmanager.cpp(20): warning C4996: 'GetVersionExW': was declared deprecated
+  c:\program files (x86)\windows kits\8.1\include\um\sysinfoapi.h(442): note: see declaration of 'GetVersionExW'
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\fontsmanager.cpp(23): warning C4996: 'GetVersionExW': was declared deprecated
+  c:\program files (x86)\windows kits\8.1\include\um\sysinfoapi.h(442): note: see declaration of 'GetVersionExW'
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\fontsmanager.cpp(48): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(90): note: see declaration of 'strcat'
+  FontProperties.cpp
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\fontproperties.cpp(23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: see declaration of 'fopen'
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\fontproperties.cpp(48): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(346): note: see declaration of 'strncpy'
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\fontproperties.cpp(67): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(346): note: see declaration of 'strncpy'
+  EMFExtract.cpp
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\emfextract.h(16): warning C4251: 'EMFExtract::splFilename': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'EMFExtract'
+  c:\program files (x86)\microsoft visual studio\2017\enterprise\vc\tools\msvc\14.10.25017\include\xstring(3997): note: see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\emfextract.h(17): warning C4251: 'EMFExtract::fontTempFolder': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'EMFExtract'
+  c:\program files (x86)\microsoft visual studio\2017\enterprise\vc\tools\msvc\14.10.25017\include\xstring(3997): note: see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\emfextract.cpp(71): warning C4101: 'msg': unreferenced local variable
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\emfextract.cpp(203): warning C4390: ';': empty controlled statement found; is this the intent?
+c:\users\vitor\git\tonner-save\fontesemf\emfextract\emfextract.cpp(205): warning C4390: ';': empty controlled statement found; is this the intent?
+  Generating Code...
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(1198,5): warning MSB8012: TargetPath(C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFExtract.dll) does not match the Linker's OutputFile property value (C:\Users\Vitor\git\tonner-save\fontesemf\bin\EMFExtract.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+dllmain.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+     Creating library C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFExtract.lib and object C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFExtract.exp
+  EMFExtract.vcxproj -> C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFExtract.dll
+  EMFExtract.vcxproj -> C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFExtract.pdb (Full PDB)

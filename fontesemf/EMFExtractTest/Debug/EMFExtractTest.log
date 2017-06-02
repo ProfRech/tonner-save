@@ -1,0 +1,7 @@
+﻿  main.cpp
+c:\dev\emf\fontesemf\emfextract\emfextract.h(16): warning C4251: 'EMFExtract::splFilename': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'EMFExtract'
+c:\dev\emf\fontesemf\emfextract\emfextract.h(17): warning C4251: 'EMFExtract::fontTempFolder': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'EMFExtract'
+c:\dev\emf\fontesemf\emfprinter\emfprinter.h(49): warning C4251: 'EMFPrinter::fontTempFolder': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'EMFPrinter'
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(1189,5): warning MSB8012: TargetPath(C:\dev\emf\fontesemf\Debug\EMFExtractTest.exe) does not match the Linker's OutputFile property value (C:\dev\emf\fontesemf\bin\EMFExtractTest.exe). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  EMFExtractTest.vcxproj -> C:\dev\emf\fontesemf\Debug\EMFExtractTest.exe

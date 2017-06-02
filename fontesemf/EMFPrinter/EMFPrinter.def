@@ -1,0 +1,9 @@
+LIBRARY	"EMFPrinter"
+
+EXPORTS
+  GetEMFPrinterObject @1
+  PrintEMF @2
+  DeleteEMFObject @3
+  StartPrintEMFJob @4
+  ProcessPrintEMFJob @5
+
