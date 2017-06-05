@@ -5,9 +5,27 @@
 #include "EMFEdit.h"
 #include <assert.h>
 
+//TODO fazer esse método funcionar
 void EditEMF(char * input, char * output, unsigned percent)
 {
-	//TODO criar objeto do tipo EMFEdit e chamar o método EnumEMF
+	HWND desktop = GetDesktopWindow();
+	HDC dc = GetDC(desktop);
+
+	RECT size = { 0, 0, 100000, 100000 };
+
+	HDC metaDC = CreateEnhMetaFileA(0, output, &size, "TEST");
+
+	HENHMETAFILE emf = GetEnhMetaFileA(input);
+
+	EMFEdit* emfEditor = new EMFEdit(percent);
+
+	emfEditor->EnumEMF(metaDC, emf, &size);
+
+	delete(emfEditor);
+
+	HENHMETAFILE metafile = CloseEnhMetaFile(metaDC);
+	DeleteEnhMetaFile(metafile);
+	DeleteDC(metaDC);
 }
 
 inline void MaptoWhitish(COLORREF & cr, unsigned percent)
@@ -91,7 +109,7 @@ int EMFEdit::EMFProc(HDC hDC, HANDLETABLE * pHTable, const ENHMETARECORD * pEMFR
 	return pObj->ProcessRecord(hDC, pHTable, pEMFR, nObj);
 }
 
-EMFEdit::EMFEdit(char * input, char * output, unsigned percentage) : input(input), output(output)
+EMFEdit::EMFEdit(unsigned percentage)
 {
 	setPercentage(percentage);
 }

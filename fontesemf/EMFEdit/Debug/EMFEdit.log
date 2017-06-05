@@ -1,5 +1,5 @@
-﻿  stdafx.cpp
-  dllmain.cpp
-  EMFEdit.cpp
+﻿  EMFEdit.cpp
+c:\users\vitor\git\tonner-save\fontesemf\emfedit\emfedit.cpp(9): warning C4273: 'EditEMF': inconsistent dll linkage
+  c:\users\vitor\git\tonner-save\fontesemf\emfedit\emfedit.h(13): note: see previous definition of 'EditEMF'
   EMFEdit.vcxproj -> C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFEdit.dll
   EMFEdit.vcxproj -> C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFEdit.pdb (Partial PDB)
