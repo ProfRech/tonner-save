@@ -1,3 +1,4 @@
-﻿  EMFEditTest.cpp
+﻿  stdafx.cpp
+  EMFEditTest.cpp
   EMFEditTest.vcxproj -> C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFEditTest.exe
   EMFEditTest.vcxproj -> C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFEditTest.pdb (Partial PDB)

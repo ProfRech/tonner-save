@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "EMFEdit.h"
 #include <assert.h>
+#include <stdio.h>
 
 //TODO fazer esse método funcionar
 void EditEMF(char * input, char * output, unsigned percent)
@@ -13,28 +14,34 @@ void EditEMF(char * input, char * output, unsigned percent)
 
 	RECT size = { 0, 0, 100000, 100000 };
 
-	HDC metaDC = CreateEnhMetaFileA(0, output, &size, "TEST");
-
 	HENHMETAFILE emf = GetEnhMetaFileA(input);
 
 	EMFEdit* emfEditor = new EMFEdit(percent);
 
-	emfEditor->EnumEMF(metaDC, emf, &size);
+	emfEditor->EnumEMF(dc, emf, &size);
+
+	HDC metaDC = CreateEnhMetaFileA(dc, output, &size, "TEST");
 
 	delete(emfEditor);
 
 	HENHMETAFILE metafile = CloseEnhMetaFile(metaDC);
+	DeleteEnhMetaFile(emf);
 	DeleteEnhMetaFile(metafile);
 	DeleteDC(metaDC);
+
+	getchar();
 }
 
 inline void MaptoWhitish(COLORREF & cr, unsigned percent)
 {
 	if ((cr & 0xFF000000) != PALETTEINDEX(0)) // not paletteindex
 	{
-		BYTE gray = (GetRValue(cr) * 77 + GetGValue(cr) * 150 + GetBValue(cr) * 29 + 128) / 256;
+		static int teste = 0;
+		printf("Passou pela %d vez, a cor eh: r = %d, g = %d, b = %d\n", ++teste, GetRValue(cr), GetGValue(cr), GetBValue(cr));
 
-		cr = (cr & 0xFF000000) | RGB(gray, gray, gray);
+		BYTE black = 0x00;
+
+		cr = (cr & 0xFF000000) | RGB(black, black, black);
 	}
 }
 
