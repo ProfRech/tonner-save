@@ -16,11 +16,15 @@ void EditEMF(WCHAR* input, WCHAR* output, unsigned percent)
 {
 	Metafile in(input);
 
+	puts("1");
+
 	int paletteSize = in.GetPaletteSize();
 
 	ColorPalette* palette = (ColorPalette*)malloc(paletteSize);
 
-	in.GetPalette(palette, paletteSize); //Exception thrown: read access violation.
+	in.GetPalette(palette, paletteSize);
+
+	puts("2");
 
 	for (int i = 0; i < paletteSize; i++)
 	{
@@ -35,15 +39,20 @@ void EditEMF(WCHAR* input, WCHAR* output, unsigned percent)
 
 	free(palette);
 
+	puts("3");
+
 	CLSID  encoderClsid;
-	auto result = GetEncoderClsid(L"image/emf", &encoderClsid);
+	auto result = GetEncoderClsid(L"image/emf", &encoderClsid);// ERROR
 	
+	puts("4");
+
 	int encSize = in.GetEncoderParameterListSize(&encoderClsid);
 
 	EncoderParameters* encPar = (EncoderParameters*)malloc(encSize);
 
 	in.GetEncoderParameterList(&encoderClsid, encSize, encPar);
 
+	puts("5");
 
 	in.Save(output, &encoderClsid, encPar);
 
