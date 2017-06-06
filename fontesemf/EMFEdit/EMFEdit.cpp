@@ -5,10 +5,60 @@
 #include "EMFEdit.h"
 #include <assert.h>
 #include <stdio.h>
+#include <windows.h>
+#include <objidl.h>
+#include <gdiplus.h>
+using namespace Gdiplus;
+#pragma comment (lib,"Gdiplus.lib")
 
 //TODO fazer esse método funcionar
-void EditEMF(char * input, char * output, unsigned percent)
+void EditEMF(WCHAR* input, WCHAR* output, unsigned percent)
 {
+	Metafile in(input);
+
+	int paletteSize = in.GetPaletteSize();
+
+	ColorPalette* palette = (ColorPalette*)malloc(paletteSize);
+
+	in.GetPalette(palette, paletteSize); //Exception thrown: read access violation.
+
+	for (int i = 0; i < paletteSize; i++)
+	{
+		ARGB color = palette->Entries[i];
+		BYTE red = (GetRValue(color) * percent + 0xff * (100-percent))/100;
+		BYTE green = (GetGValue(color) * percent + 0xff * (100 - percent)) / 100;
+		BYTE blue = (GetBValue(color) * percent + 0xff * (100 - percent)) / 100;
+		palette->Entries[i] = (blue)|(green<<8)|(red<<16)|(0xff<<24);
+	}
+
+	in.SetPalette(palette);
+
+	free(palette);
+
+	CLSID  encoderClsid;
+	auto result = GetEncoderClsid(L"image/emf", &encoderClsid);
+	
+	int encSize = in.GetEncoderParameterListSize(&encoderClsid);
+
+	EncoderParameters* encPar = (EncoderParameters*)malloc(encSize);
+
+	in.GetEncoderParameterList(&encoderClsid, encSize, encPar);
+
+
+	in.Save(output, &encoderClsid, encPar);
+
+	free(encPar);
+
+	/* Não funciona
+	RECT size = { 0, 0, in->GetWidth(), in->GetHeight() };
+
+	HDC metaDC = CreateEnhMetaFileA(0 , output, &size, "TEST");
+
+	Metafile* out = new Metafile(metaDC, out);
+
+	
+
+	/* Não funciona
 	HWND desktop = GetDesktopWindow();
 	HDC dc = GetDC(desktop);
 
@@ -28,8 +78,39 @@ void EditEMF(char * input, char * output, unsigned percent)
 	DeleteEnhMetaFile(emf);
 	DeleteEnhMetaFile(metafile);
 	DeleteDC(metaDC);
-
+	/**/
 	getchar();
+}
+
+int GetEncoderClsid(const WCHAR* format, CLSID* pClsid)
+{
+	UINT  num = 0;          // number of image encoders
+	UINT  size = 0;         // size of the image encoder array in bytes
+
+	ImageCodecInfo* pImageCodecInfo = NULL;
+
+	GetImageEncodersSize(&num, &size);
+	if (size == 0)
+		return -1;  // Failure
+
+	pImageCodecInfo = (ImageCodecInfo*)(malloc(size));
+	if (pImageCodecInfo == NULL)
+		return -1;  // Failure
+
+	GetImageEncoders(num, size, pImageCodecInfo);
+
+	for (UINT j = 0; j < num; ++j)
+	{
+		if (wcscmp(pImageCodecInfo[j].MimeType, format) == 0)
+		{
+			*pClsid = pImageCodecInfo[j].Clsid;
+			free(pImageCodecInfo);
+			return j;  // Success
+		}
+	}
+
+	free(pImageCodecInfo);
+	return -1;  // Failure
 }
 
 inline void MaptoWhitish(COLORREF & cr, unsigned percent)

@@ -10,8 +10,10 @@
 #endif
 
 extern "C" {
-	DLLAPI void EditEMF(char* input, char* output, unsigned percent);
+	DLLAPI void EditEMF(WCHAR* input, WCHAR* output, unsigned percent);
 }
+
+int GetEncoderClsid(const WCHAR* format, CLSID* pClsid);
 
 inline void MaptoWhitish(COLORREF & cr, unsigned percent);
 
