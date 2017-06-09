@@ -8,7 +8,7 @@
 typedef void (EditEMFFunc)(char* input, char* output, unsigned percentage);
 
 char* input = "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf";
-char* output = "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf";
+char* output = "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test_Result.emf";
 unsigned percentage = 75;
 
 int main(void)
