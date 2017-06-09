@@ -10,35 +10,7 @@
 #endif
 
 extern "C" {
-	DLLAPI void EditEMF(WCHAR* input, WCHAR* output, unsigned percent);
+	DLLAPI void EditEMF(char* input, char* output, int percent);
 }
-
-int GetEncoderClsid(const WCHAR* format, CLSID* pClsid);
-
-inline void MaptoWhitish(COLORREF & cr, unsigned percent);
-
-class EMFEdit
-{
-	// virtual function to process every EMF record, return 0 to terminate
-	virtual int ProcessRecord(HDC hDC, HANDLETABLE * pHTable, const ENHMETARECORD * pEMFR, int nObj);
-
-	// static callback function, dispatch to virtual function ProcessRecord
-	static int CALLBACK EMFProc(HDC hDC, HANDLETABLE * pHTable,
-		const ENHMETARECORD * pEMFR, int nObj, LPARAM lpData);
-
-private:
-
-	unsigned percentage;
-
-public:
-
-	EMFEdit(unsigned percentage);
-
-	unsigned getPercentage(void) { return percentage; }
-
-	void setPercentage(unsigned percentage);
-
-	BOOL EnumEMF(HDC hDC, HENHMETAFILE hemf, const RECT * lpRect);
-};
 
 #endif // !_EMFEDIT_H_

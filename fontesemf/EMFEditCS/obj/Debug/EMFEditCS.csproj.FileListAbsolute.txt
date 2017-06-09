@@ -1,0 +1,6 @@
+C:\Users\Vitor\git\tonner-save\fontesemf\EMFEditCS\bin\Debug\EMFEditCS.dll
+C:\Users\Vitor\git\tonner-save\fontesemf\EMFEditCS\bin\Debug\EMFEditCS.pdb
+C:\Users\Vitor\git\tonner-save\fontesemf\EMFEditCS\bin\Debug\EMFEditCS.tlb
+C:\Users\Vitor\git\tonner-save\fontesemf\EMFEditCS\obj\Debug\EMFEditCS.dll
+C:\Users\Vitor\git\tonner-save\fontesemf\EMFEditCS\obj\Debug\EMFEditCS.pdb
+C:\Users\Vitor\git\tonner-save\fontesemf\EMFEditCS\obj\Debug\EMFEditCS.csprojResolveAssemblyReference.cache

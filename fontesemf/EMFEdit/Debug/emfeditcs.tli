@@ -1,0 +1,19 @@
+﻿// Created by Microsoft (R) C/C++ Compiler Version 14.10.25019.0 (b4b1c84e).
+//
+// c:\users\vitor\git\tonner-save\fontesemf\emfedit\debug\emfeditcs.tli
+//
+// Wrapper implementations for Win32 type library C:\Users\Vitor\git\tonner-save\fontesemf\EMFEditCS\bin\Debug\EMFEditCS.tlb
+// compiler-generated file created 06/09/17 at 15:10:45 - DO NOT EDIT!
+
+#pragma once
+
+//
+// interface IImageEditor wrapper method implementations
+//
+
+inline long IImageEditor::Edit ( _bstr_t input, _bstr_t output, long percentage ) {
+    long _result = 0;
+    HRESULT _hr = raw_Edit(input, output, percentage, &_result);
+    if (FAILED(_hr)) _com_issue_errorex(_hr, this, __uuidof(this));
+    return _result;
+}

@@ -5,10 +5,10 @@
 #include <Windows.h>
 #include <stdio.h>
 
-typedef void (EditEMFFunc)(WCHAR* input, WCHAR* output, unsigned percentage);
+typedef void (EditEMFFunc)(char* input, char* output, unsigned percentage);
 
-WCHAR* input = L"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\1.spl.00000.emf";
-WCHAR* output = L"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\new.emf";
+char* input = "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf";
+char* output = "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf";
 unsigned percentage = 75;
 
 int main(void)

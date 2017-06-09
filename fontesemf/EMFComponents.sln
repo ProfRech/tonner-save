@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EMFExtract", "EMFExtract\EMFExtract.vcxproj", "{C4CA37EA-07FB-43DA-B3A7-48D2AFE1C715}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EMFEdit", "EMFEdit\EMFEdit.vcxproj", "{9C53B74D-0B51-4E56-9F3C-C51CB9F8BCE2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EMFEditTest", "EMFEditTest\EMFEditTest.vcxproj", "{888FC5E0-C49B-4EA1-B9AA-50A7EE24A969}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMFEditCS", "EMFEditCS\EMFEditCS.csproj", "{5AF63FAE-3341-447D-8F41-264718789845}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +86,18 @@ Global
 		{888FC5E0-C49B-4EA1-B9AA-50A7EE24A969}.Release|Win32.Build.0 = Release|Win32
 		{888FC5E0-C49B-4EA1-B9AA-50A7EE24A969}.Release|x64.ActiveCfg = Release|x64
 		{888FC5E0-C49B-4EA1-B9AA-50A7EE24A969}.Release|x64.Build.0 = Release|x64
+		{5AF63FAE-3341-447D-8F41-264718789845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AF63FAE-3341-447D-8F41-264718789845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AF63FAE-3341-447D-8F41-264718789845}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{5AF63FAE-3341-447D-8F41-264718789845}.Debug|Win32.Build.0 = Debug|Any CPU
+		{5AF63FAE-3341-447D-8F41-264718789845}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5AF63FAE-3341-447D-8F41-264718789845}.Debug|x64.Build.0 = Debug|Any CPU
+		{5AF63FAE-3341-447D-8F41-264718789845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AF63FAE-3341-447D-8F41-264718789845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AF63FAE-3341-447D-8F41-264718789845}.Release|Win32.ActiveCfg = Release|Any CPU
+		{5AF63FAE-3341-447D-8F41-264718789845}.Release|Win32.Build.0 = Release|Any CPU
+		{5AF63FAE-3341-447D-8F41-264718789845}.Release|x64.ActiveCfg = Release|Any CPU
+		{5AF63FAE-3341-447D-8F41-264718789845}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

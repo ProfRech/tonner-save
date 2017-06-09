@@ -1,0 +1,67 @@
+﻿// Created by Microsoft (R) C/C++ Compiler Version 14.10.25019.0 (b4b1c84e).
+//
+// c:\users\vitor\git\tonner-save\fontesemf\emfedit\debug\emfeditcs.tlh
+//
+// C++ source equivalent of Win32 type library C:\Users\Vitor\git\tonner-save\fontesemf\EMFEditCS\bin\Debug\EMFEditCS.tlb
+// compiler-generated file created 06/09/17 at 15:10:45 - DO NOT EDIT!
+
+#pragma once
+#pragma pack(push, 8)
+
+#include <comdef.h>
+
+//
+// Forward references and typedefs
+//
+
+struct __declspec(uuid("5af63fae-3341-447d-8f41-264718789845"))
+/* LIBID */ __EMFEditCS;
+struct __declspec(uuid("29f1e3bb-416a-3802-bae7-9df368eb50fb"))
+/* dual interface */ IImageEditor;
+struct /* coclass */ ImageEditor;
+
+//
+// Smart pointer typedef declarations
+//
+
+_COM_SMARTPTR_TYPEDEF(IImageEditor, __uuidof(IImageEditor));
+
+//
+// Type library items
+//
+
+struct __declspec(uuid("29f1e3bb-416a-3802-bae7-9df368eb50fb"))
+IImageEditor : IDispatch
+{
+    //
+    // Wrapper methods for error-handling
+    //
+
+    long Edit (
+        _bstr_t input,
+        _bstr_t output,
+        long percentage );
+
+    //
+    // Raw methods provided by interface
+    //
+
+      virtual HRESULT __stdcall raw_Edit (
+        /*[in]*/ BSTR input,
+        /*[in]*/ BSTR output,
+        /*[in]*/ long percentage,
+        /*[out,retval]*/ long * pRetVal ) = 0;
+};
+
+struct __declspec(uuid("8f089ace-27f8-3b56-b151-0b68276ed3f6"))
+ImageEditor;
+    // interface _Object
+    // [ default ] interface IImageEditor
+
+//
+// Wrapper method implementations
+//
+
+#include "c:\users\vitor\git\tonner-save\fontesemf\emfedit\debug\emfeditcs.tli"
+
+#pragma pack(pop)
