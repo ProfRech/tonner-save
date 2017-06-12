@@ -21,10 +21,10 @@ namespace EMFEditCS
     {
         public int Edit(string input, string output, int percentage)
         {
-            Bitmap meta = new Bitmap(input);
-            Bitmap bit = (Bitmap)meta.Clone();
-            meta.Dispose();
-
+            //Bitmap meta = new Bitmap(input);
+            //Bitmap bit = (Bitmap)meta.Clone();
+            //meta.Dispose();
+            Bitmap bit = new Bitmap(input);
 
             Graphics g = Graphics.FromImage(bit);
             SolidBrush myBrush = new SolidBrush(Color.FromArgb((0xff * percentage) / 100, 0xff, 0xff, 0xff));
