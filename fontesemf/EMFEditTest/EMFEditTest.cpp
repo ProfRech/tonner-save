@@ -8,53 +8,62 @@
 
 EditEMFFunc* editEMF;
 
-char* inputs[] =
+Test tests[] =
 {
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test4.emf",
-	"",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-};
-char* outputs[] =
-{
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test3.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-	""
-};
-int percentages[] =
-{
-	25,
-	25,
-	25,
-	25,
-	-1,
-	101,
-	25,
-	25,
-	25
-};
-int resultsExpected[] =
-{
-	0,
-	0,
-	0,
-	4,
-	2,
-	2,
-	1,
-	1,
-	3
+	// teste normal
+	// espera sucesso (0)
+	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+		  25,
+		  0 },
+	// teste salvar sobre arquivo já existente
+	// espera sucesso (0)
+	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+		  25,
+		  0 },
+	// teste processar arquivo já processado
+	// espera sucesso (0)
+	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test3.emf",
+		  25,
+		  0 },
+	// teste salvar no mesmo arquivo
+	// espera erro (4)
+	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+		  25,
+		  4 },
+	// teste porcentagem menor que 0
+	// espera erro (2)
+	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf", 
+		  -1,
+		  2 },
+	// teste porcentagem maior que 100
+	// espera erro (2)
+	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+		  101, 
+		  2 },
+	// teste arquivo de entrada inexistente
+	// espera erro (1)
+	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test4.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf", 
+		  25, 
+		  1 },
+	// teste caminho inválido para arquivo de entrada
+	// espera erro (1)
+	Test{ "",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+		  25, 
+		  1 },
+	// teste caminho inválido para arquivo de saída
+	// espera erro (3)
+	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "",
+		  25,
+		  3 }
 };
 
 int main(void)
@@ -71,15 +80,16 @@ int main(void)
 
 	for (int i = 0; i < 9; i++)
 	{
-		int result = CallFunction(inputs[i], outputs[i], percentages[i]);
+		Test t = tests[i];
+		int result = CallFunction(t.input, t.output, t.percentage);
 		printf("\nTest: %d\ninput: %s\noutput: %s\npercentage: %d"
-				"\nresult expected: %d\nresult expected text: %s"
+				"\nexpected result: %d\nexpected result text: %s"
 				"\nresult: %d\nresult text: %s"
 				"\nvalidated test: %s\n",
-				(i+1), inputs[i], outputs[i], percentages[i],
-				resultsExpected[i], ResultText(resultsExpected[i]),
+				(i+1), t.input, t.output, t.percentage,
+				t.expectedResult, ResultText(t.expectedResult),
 				result, ResultText(result),
-				(result == resultsExpected[i] ? "yes" : "no"));
+				(result == t.expectedResult ? "yes" : "no"));
 
 	}
 	getchar();
