@@ -6,6 +6,57 @@
 #include <stdio.h>
 #include "EMFEditTest.h"
 
+EditEMFFunc* editEMF;
+
+char* inputs[] =
+{
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test4.emf",
+	"",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+};
+char* outputs[] =
+{
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test3.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+	"C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
+	""
+};
+int percentages[] =
+{
+	25,
+	25,
+	25,
+	25,
+	-1,
+	101,
+	25,
+	25,
+	25
+};
+int resultsExpected[] =
+{
+	0,
+	0,
+	0,
+	4,
+	2,
+	2,
+	1,
+	1,
+	3
+};
+
 int main(void)
 {
 	HMODULE hLib = LoadLibraryA("EMFEdit.dll");
@@ -26,9 +77,9 @@ int main(void)
 				"\nresult: %d\nresult text: %s"
 				"\nvalidated test: %s\n",
 				(i+1), inputs[i], outputs[i], percentages[i],
-				resultExpected[i], ResultText(resultExpected[i]),
+				resultsExpected[i], ResultText(resultsExpected[i]),
 				result, ResultText(result),
-				(result == resultExpected[i] ? "yes" : "no"));
+				(result == resultsExpected[i] ? "yes" : "no"));
 
 	}
 	getchar();
