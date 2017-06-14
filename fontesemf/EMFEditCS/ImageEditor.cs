@@ -19,52 +19,44 @@ namespace EMFEditCS
     [ClassInterface(ClassInterfaceType.None)]
     public class ImageEditor : IImageEditor
     {
+        #pragma warning disable CS0168
         public int Edit(string input, string output, int percentage)
         {
-            //Bitmap meta = new Bitmap(input);
-            //Bitmap bit = (Bitmap)meta.Clone();
-            //meta.Dispose();
-            Bitmap bit = new Bitmap(input);
-
-            Graphics g = Graphics.FromImage(bit);
-            SolidBrush myBrush = new SolidBrush(Color.FromArgb((0xff * percentage) / 100, 0xff, 0xff, 0xff));
-            g.FillRectangle(myBrush, new Rectangle(0, 0, bit.Width, bit.Height));
-            bit.Save(output, System.Drawing.Imaging.ImageFormat.Emf);
-            g.Dispose();
-
-            /*
-            for (int x = 0, flag = 0; x < bit.Width; x++, flag = flag == 0 ? 1 : 0)
+            Bitmap bit = null;
+            Graphics g = null;
+            try
             {
-                for (int y = flag; y < bit.Height; y += 2)
+                try
                 {
-                    Color newC = Color.FromArgb(0);
-                    bit.SetPixel(x, y, newC);
+                    bit = new Bitmap(input);
+                    g = Graphics.FromImage(bit);
                 }
-            }
-            bit.Save(output, System.Drawing.Imaging.ImageFormat.Emf);
-            */
+                catch (ArgumentException e) { return 1; } // Error: invalid input file
 
-            /*
-            for (int x = 0; x < bit.Width; x++)
+                try
+                {
+                    SolidBrush myBrush = new SolidBrush(Color.FromArgb((0xff * percentage) / 100, 0xff, 0xff, 0xff));
+                    g.FillRectangle(myBrush, new Rectangle(0, 0, bit.Width, bit.Height));
+                }catch (ArgumentException e) { return 2; } // Error: the percentage value must be between 0 and 100
+
+
+                try
+                {
+                    bit.Save(output, System.Drawing.Imaging.ImageFormat.Emf);
+                }
+                catch (ArgumentException e) { return 3; } // Error: invalid output file
+                catch (ExternalException e) { return 4; } // Error: the input file must be different than the output file
+
+                return 0; // Successful
+            }
+            catch (Exception e) { return 5; } // Generic error
+            finally
             {
-                for (int y = 0; y < bit.Height; y++)
-                {
-                    Color currentC = bit.GetPixel(x, y);
-                    if ((currentC.ToArgb() & 0x00FFFFFFu) == 0x00FFFFFFu) continue;// se for branco
-                    if ((currentC.ToArgb() | 0x00FFFFFFu) == 0x00FFFFFFu) continue;// se for transparente
-                    Color newC = Color.FromArgb(currentC.A,
-                        (currentC.R * (100 - percentage) + 0xFF * percentage) / 100,
-                        (currentC.G * (100 - percentage) + 0xFF * percentage) / 100,
-                        (currentC.B * (100 - percentage) + 0xFF * percentage) / 100);
-                    bit.SetPixel(x, y, newC);
-                }
+                if(g != null)
+                    g.Dispose();
+                if(bit != null)
+                    bit.Dispose();
             }
-            bit.Save(output, System.Drawing.Imaging.ImageFormat.Emf);
-            */
-
-            bit.Dispose();
-
-            return 0;
         }
     }
 }
