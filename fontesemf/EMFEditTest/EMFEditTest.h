@@ -8,7 +8,7 @@ typedef struct {
 	int expectedResult;
 } Test;
 
-typedef int (EditEMFFunc)(char* input, char* output, unsigned percentage);
+typedef int (EditEMFFunc)(char* input, char* output, int percentage);
 
 int CallFunction(char* i, char* o, int p);
 char* ResultText(int r);
