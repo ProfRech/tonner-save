@@ -2,68 +2,84 @@
 //
 
 #include "stdafx.h"
+#include <iostream>
 #include <Windows.h>
 #include <stdio.h>
 #include "EMFEditTest.h"
+
+using std::cout;
+using std::endl;
 
 EditEMFFunc* editEMF;
 
 Test tests[] =
 {
-	// teste normal
+	// teste 1 normal
 	// espera sucesso (0)
 	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
 		  25,
 		  0 },
-	// teste salvar sobre arquivo já existente
+	// teste 2 salvar sobre arquivo já existente
 	// espera sucesso (0)
 	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
 		  25,
 		  0 },
-	// teste processar arquivo já processado
+	// teste 3 processar arquivo já processado
 	// espera sucesso (0)
 	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test3.emf",
 		  25,
 		  0 },
-	// teste salvar no mesmo arquivo
+	// teste 4 salvar no mesmo arquivo
 	// espera erro (4)
 	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
 		  25,
 		  4 },
-	// teste porcentagem menor que 0
+	// teste 5 porcentagem menor que 0
 	// espera erro (2)
 	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf", 
 		  -1,
 		  2 },
-	// teste porcentagem maior que 100
+	// teste 6 porcentagem maior que 100
 	// espera erro (2)
 	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
 		  101, 
 		  2 },
-	// teste arquivo de entrada inexistente
+	// teste 7 arquivo de entrada inexistente
 	// espera erro (1)
-	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test4.emf",
+	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test0.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf", 
 		  25, 
 		  1 },
-	// teste caminho inválido para arquivo de entrada
+	// teste 8 caminho inválido para arquivo de entrada
 	// espera erro (1)
 	Test{ "",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
 		  25, 
 		  1 },
-	// teste caminho inválido para arquivo de saída
+	// teste 9 caminho inválido para arquivo de saída
 	// espera erro (3)
 	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
 		  "",
 		  25,
-		  3 }
+		  3 },
+	// teste 10 porcentagem 0 - arquivo gerado equivalente ao original
+	// espera sucesso (0)
+	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test4.emf",
+		  0,
+		  0 },
+	// teste 11 porcentagem 100 - arquivo gerado totalmente em branco
+	// espera sucesso (0)
+	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test5.emf",
+		  100,
+		  0 },
 };
 
 int main(void)
@@ -77,7 +93,7 @@ int main(void)
 	}
 
 	editEMF = reinterpret_cast<EditEMFFunc*>(GetProcAddress(hLib, "EditEMF"));
-
+	int res = 0;
 	for (int i = 0, c = 0; c < sizeof(tests) ; i++, c += sizeof(tests[i]))
 	{
 		Test* t = &tests[i];
@@ -90,8 +106,21 @@ int main(void)
 				t->expectedResult, ResultText(t->expectedResult),
 				result, ResultText(result),
 				(result == t->expectedResult ? "yes" : "no"));
-
+		res += (result != t->expectedResult) << i;
 	}
+
+	cout << endl;
+	if (res)
+	{
+		cout << "Failed tests: ";
+		for (int i = 0; res; res >>= 1, i++)
+			if (res & 1)
+				cout << (i+1) << ((res >> 1) ? ", " : "");
+	}
+	else
+		cout << "All tests were successful";
+	cout << endl;
+
 	getchar();
 
 	return 0;
