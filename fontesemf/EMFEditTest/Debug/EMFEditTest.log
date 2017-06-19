@@ -1,4 +1,2 @@
-﻿  EMFEditTest.cpp
-c:\users\vitor\git\tonner-save\fontesemf\emfedittest\emfedittest.cpp(115): warning C4715: 'ResultText': not all control paths return a value
-  EMFEditTest.vcxproj -> C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFEditTest.exe
+﻿  EMFEditTest.vcxproj -> C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFEditTest.exe
   EMFEditTest.vcxproj -> C:\Users\Vitor\git\tonner-save\fontesemf\Debug\EMFEditTest.pdb (Partial PDB)

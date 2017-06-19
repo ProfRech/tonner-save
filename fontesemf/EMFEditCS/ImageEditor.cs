@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Imaging;
 
@@ -42,7 +38,7 @@ namespace EMFEditCS
 
                 try
                 {
-                    bit.Save(output, System.Drawing.Imaging.ImageFormat.Emf);
+                    bit.Save(output, ImageFormat.Emf);
                 }
                 catch (ArgumentException e) { return 3; } // Error: invalid output file
                 catch (ExternalException e) { return 4; } // Error: the input file must be different than the output file
