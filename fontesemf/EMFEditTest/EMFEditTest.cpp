@@ -78,18 +78,18 @@ int main(void)
 
 	editEMF = reinterpret_cast<EditEMFFunc*>(GetProcAddress(hLib, "EditEMF"));
 
-	for (int i = 0; i < 9; i++)
+	for (int i = 0, c = 0; c < sizeof(tests) ; i++, c += sizeof(tests[i]))
 	{
-		Test t = tests[i];
-		int result = CallFunction(t.input, t.output, t.percentage);
+		Test* t = &tests[i];
+		int result = CallFunction(t->input, t->output, t->percentage);
 		printf("\nTest: %d\ninput: %s\noutput: %s\npercentage: %d"
 				"\nexpected result: %d\nexpected result text: %s"
 				"\nresult: %d\nresult text: %s"
 				"\nvalidated test: %s\n",
-				(i+1), t.input, t.output, t.percentage,
-				t.expectedResult, ResultText(t.expectedResult),
+				(i+1), t->input, t->output, t->percentage,
+				t->expectedResult, ResultText(t->expectedResult),
 				result, ResultText(result),
-				(result == t.expectedResult ? "yes" : "no"));
+				(result == t->expectedResult ? "yes" : "no"));
 
 	}
 	getchar();
