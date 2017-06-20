@@ -94,7 +94,7 @@ int main(void)
 
 	editEMF = reinterpret_cast<EditEMFFunc*>(GetProcAddress(hLib, "EditEMF"));
 	int res = 0;
-	for (int i = 0, c = 0; c < sizeof(tests) ; i++, c += sizeof(tests[i]))
+	for (int i = 0, c = 0; c < sizeof(tests) ; c += sizeof(tests[i]), i++)
 	{
 		Test* t = &tests[i];
 		int result = CallFunction(t->input, t->output, t->percentage);
