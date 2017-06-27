@@ -28,6 +28,7 @@ int EditEMF(char* input, char* output, unsigned __int8 percent)
 	HENHMETAFILE newemf = SetEnhMetaFileBits(bufferSize, metabits);
 	CopyEnhMetaFileA(newemf, output);
 
+	free(metabits);
 
 	return 0;
 }
