@@ -10,7 +10,9 @@
 #endif
 
 extern "C" {
-	DLLAPI int EditEMF(char* input, char* output, int percent);
+	DLLAPI int EditEMF(char* input, char* output, unsigned __int8 percent);
 }
+
+char * EMFAnalyze(char * ptr, char * ptr_max, unsigned __int8 percent);
 
 #endif // !_EMFEDIT_H_

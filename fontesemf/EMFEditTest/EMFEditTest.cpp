@@ -14,70 +14,34 @@ EditEMFFunc* editEMF;
 
 Test tests[] =
 {
-	// teste 1 normal
+	// teste 1 0%
 	// espera sucesso (0)
 	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-		  25,
-		  0 },
-	// teste 2 salvar sobre arquivo já existente
-	// espera sucesso (0)
-	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-		  25,
-		  0 },
-	// teste 3 processar arquivo já processado
-	// espera sucesso (0)
-	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test3.emf",
-		  25,
-		  0 },
-	// teste 4 salvar no mesmo arquivo
-	// espera erro (4)
-	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-		  25,
-		  4 },
-	// teste 5 porcentagem menor que 0
-	// espera erro (2)
-	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf", 
-		  -1,
-		  2 },
-	// teste 6 porcentagem maior que 100
-	// espera erro (2)
-	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-		  101, 
-		  2 },
-	// teste 7 arquivo de entrada inexistente
-	// espera erro (1)
-	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test0.emf",
-		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf", 
-		  25, 
-		  1 },
-	// teste 8 caminho inválido para arquivo de entrada
-	// espera erro (1)
-	Test{ "",
-		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test2.emf",
-		  25, 
-		  1 },
-	// teste 9 caminho inválido para arquivo de saída
-	// espera erro (3)
-	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-		  "",
-		  25,
-		  3 },
-	// teste 10 porcentagem 0 - arquivo gerado equivalente ao original
-	// espera sucesso (0)
-	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test4.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test0.emf",
 		  0,
 		  0 },
-	// teste 11 porcentagem 100 - arquivo gerado totalmente em branco
+	// teste 2 25%
 	// espera sucesso (0)
 	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
-		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test5.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test25.emf",
+		  25,
+		  0 },
+	  // teste 3 50%
+	  // espera sucesso (0)
+	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test50.emf",
+		  50,
+		  0 },
+	  // teste 4 75%
+	  // espera sucesso (0)
+	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test75.emf",
+		  75,
+		  0 },
+	  // teste 5 100%
+	  // espera sucesso (0)
+	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test100.emf",
 		  100,
 		  0 },
 };
