@@ -27,9 +27,6 @@
     <ClInclude Include="EMFEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EMF_NT.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
