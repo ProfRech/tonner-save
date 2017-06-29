@@ -29,15 +29,14 @@ int EditEMF(char* input, char* output, unsigned __int8 percent)
 	CopyEnhMetaFileA(newemf, output);
 
 	free(metabits);
+	DeleteEnhMetaFile(emf);
+	DeleteEnhMetaFile(newemf);
 
-	getchar();
 	return 0;
 }
 
 void MaptoWhitish(COLORREF* cr, unsigned __int8 percent)
 {
-	static int count = 0;
-	printf("passou pela %dº vez\n", ++count);
 	if ((*cr & 0xFF000000) != PALETTEINDEX(0)) // not paletteindex
 	{
 		BYTE red = (GetRValue(*cr) * (100 - percent) + 0xff * percent) / 100;
@@ -68,6 +67,8 @@ char * EMFAnalyze(char * ptr, char * ptr_max, unsigned __int8 percent)
 	PEMRPLGBLT emr_plgBlt = NULL;
 	PEMRALPHABLEND emr_alphaBlend = NULL;
 	PEMRTRANSPARENTBLT emr_transparentBlt = NULL;
+	PEMRSTRETCHDIBITS emr_stretchDiBits = NULL;
+	PEMRSTRETCHDIBITS emr_stretchDibits = NULL;
 
 	for (; ptr < ptr_max; ptr += emf_data->nSize)
 	{
@@ -131,8 +132,23 @@ char * EMFAnalyze(char * ptr, char * ptr_max, unsigned __int8 percent)
 			emr_transparentBlt = reinterpret_cast<PEMRTRANSPARENTBLT>(ptr);
 			MaptoWhitish(&(emr_transparentBlt->crBkColorSrc), percent);
 			break;
+		case EMR_STRETCHDIBITS:
+			emr_stretchDibits = reinterpret_cast<PEMRSTRETCHDIBITS>(ptr);
+
+			BITMAPINFO* hbm = reinterpret_cast<BITMAPINFO *>(ptr + emr_stretchDibits->offBmiSrc);
+
+			UINT size = (emr_stretchDibits->cbBitsSrc) / sizeof(RGBQUAD);
+
+			for (UINT i = 0; i < size; i++)
+			{
+				hbm->bmiColors[i].rgbRed = (hbm->bmiColors[i].rgbRed * (100 - percent) + 0xff * percent)/100;
+				hbm->bmiColors[i].rgbGreen = (hbm->bmiColors[i].rgbGreen * (100 - percent) + 0xff * percent) / 100;
+				hbm->bmiColors[i].rgbBlue = (hbm->bmiColors[i].rgbBlue * (100 - percent) + 0xff * percent) / 100;
+				hbm->bmiColors[i].rgbReserved = (hbm->bmiColors[i].rgbReserved * (100 - percent) + 0xff * percent) / 100;
+			}
+			break;
 		}
 	}
 	//return ptr_max; // não deveria chegar aqui
-	return ptr;
+	return nullptr;
 }
