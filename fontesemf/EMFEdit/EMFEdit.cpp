@@ -9,10 +9,15 @@
 
 int EditEMF(char* input, char* output, unsigned __int8 percent)
 {
+	if (percent > 100) return INVALID_PERCENTAGE; //percent < 0 nunca vai ocorrer por ser unsigned
 
-	//TODO validar input, output e percent
+	if (strlen(input) == 0) return INVALID_INPUT_FILE;
+
+	if (strlen(output) == 0) return INVALID_OUTPUT_FILE;
 
 	HENHMETAFILE emf = GetEnhMetaFileA(input);
+
+	if (emf == NULL) return INVALID_INPUT_FILE;
 
 	ENHMETAHEADER emfHeader;
 	int  length = GetEnhMetaFileHeader(emf, 0, NULL);
@@ -23,16 +28,23 @@ int EditEMF(char* input, char* output, unsigned __int8 percent)
 
 	UINT bufferSize = GetEnhMetaFileBits(emf, bSize, metabits);
 
+	DeleteEnhMetaFile(emf);
+
 	LPBYTE res = (LPBYTE)EMFAnalyze((char*)metabits, (char*)(metabits + bSize), percent);
 
 	HENHMETAFILE newemf = SetEnhMetaFileBits(bufferSize, metabits);
-	CopyEnhMetaFileA(newemf, output);
 
 	free(metabits);
-	DeleteEnhMetaFile(emf);
-	DeleteEnhMetaFile(newemf);
 
-	return 0;
+	HENHMETAFILE outemf = CopyEnhMetaFileA(newemf, output);
+
+	DeleteEnhMetaFile(newemf);
+	
+	if (outemf == NULL) return INVALID_OUTPUT_FILE;
+
+	DeleteEnhMetaFile(outemf);
+
+	return SUCCESSFUL;
 }
 
 void MaptoWhitish(COLORREF* cr, unsigned __int8 percent)
@@ -149,6 +161,5 @@ char * EMFAnalyze(char * ptr, char * ptr_max, unsigned __int8 percent)
 			break;
 		}
 	}
-	//return ptr_max; // não deveria chegar aqui
 	return nullptr;
 }

@@ -9,6 +9,11 @@
 #	define DLLAPI __declspec(dllimport) 
 #endif
 
+#define SUCCESSFUL 0
+#define INVALID_PERCENTAGE 1
+#define INVALID_INPUT_FILE 2
+#define INVALID_OUTPUT_FILE 3
+
 extern "C" {
 	DLLAPI int EditEMF(char* input, char* output, unsigned __int8 percent);
 }

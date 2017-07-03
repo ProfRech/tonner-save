@@ -15,35 +15,65 @@ EditEMFFunc* editEMF;
 Test tests[] =
 {
 	// teste 1 0%
-	// espera sucesso (0)
 	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test0.emf",
-		  0,
-		  0 },
+		  0 ,
+		  SUCCESSFUL },
 	// teste 2 25%
-	// espera sucesso (0)
 	Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test25.emf",
 		  25,
-		  0 },
+		  SUCCESSFUL },
 	  // teste 3 50%
-	  // espera sucesso (0)
 	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test50.emf",
 		  50,
-		  0 },
+		  SUCCESSFUL },
 	  // teste 4 75%
-	  // espera sucesso (0)
 	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test75.emf",
 		  75,
-		  0 },
+		  SUCCESSFUL },
 	  // teste 5 100%
-	  // espera sucesso (0)
 	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
 		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test100.emf",
 		  100,
-		  0 },
+		  SUCCESSFUL },
+	  // teste 6
+	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\TestT2.emf",
+		  0,
+		  SUCCESSFUL },
+	  // teste 7 salvar em arquivo existente
+	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\TestT2.emf",
+		  0,
+		  SUCCESSFUL },
+	  // teste 8 salvar no mesmo arquivo
+	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\TestT2.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\TestT2.emf",
+		  75,
+		  SUCCESSFUL },
+	  // teste 9 porcentagem acima de 100
+	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\TestT3.emf",
+		  101,
+		  INVALID_PERCENTAGE },
+	  // teste 10 input invalido
+	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\TestT9999.emf",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\TestT4.emf",
+		  50,
+		  INVALID_INPUT_FILE },
+	  // teste 11 input invalido
+	  Test{ "",
+		  "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\TestT4.emf",
+		  50,
+		  INVALID_INPUT_FILE },
+	  // teste 12 output invalido
+	  Test{ "C:\\Users\\Vitor\\git\\tonner-save\\fontesemf\\Test.emf",
+		  "",
+		  50,
+		  INVALID_OUTPUT_FILE },
 };
 
 int main(void)
@@ -98,12 +128,10 @@ int CallFunction(char* i, char* o, int p)
 char* ResultText(int r) {
 	switch (r)
 	{
-	case 0: return "Successful";
-	case 1: return "Error: invalid input file";
-	case 2: return "Error: the percentage value must be between 0 and 100";
-	case 3: return "Error: invalid output file";
-	case 4: return "Error: the input file must be different than the output file";
-	case 5: return "Generic error";
+	case SUCCESSFUL: return "Successful";
+	case INVALID_INPUT_FILE: return "Error: invalid input file";
+	case INVALID_PERCENTAGE: return "Error: the percentage value must be between 0 and 100";
+	case INVALID_OUTPUT_FILE: return "Error: invalid output file";
 	}
 }
 
